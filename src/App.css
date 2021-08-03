@@ -119,3 +119,9 @@ h1 {
 img {
   width: 600px;
 }
+
+#chart {
+  width: 500px;
+  height: 500px;
+  margin: auto;
+}
