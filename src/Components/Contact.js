@@ -15,14 +15,23 @@ class Contact extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log("your form has been submitted");
-    this.setState({
-      name: "",
-      location: "",
-      email: "",
-      type: "General Enquiry",
-      content: "",
-    });
+    const { name, content } = this.state;
+    if (name.length === 0 && content.length === 0) {
+      alert("You need to fill out your name and add some content");
+    } else if (name.length === 0) {
+      alert("You need to fill out your name");
+    } else if (content.length === 0) {
+      alert("You need to add some content");
+    } else {
+      alert("Your contact request has been submitted, thank you");
+      this.setState({
+        name: "",
+        location: "",
+        email: "",
+        type: "General Enquiry",
+        content: "",
+      });
+    }
   };
 
   render() {
