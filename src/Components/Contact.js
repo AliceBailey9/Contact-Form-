@@ -1,5 +1,6 @@
 import { firebase } from "../firestore";
 import emailjs from "emailjs-com";
+import { emailData } from "../email";
 import React, { Component } from "react";
 const { validateEmail, validateNameContent } = require("../utils");
 
@@ -31,14 +32,13 @@ class Contact extends Component {
         .set(this.state)
         .then(() => {
           emailjs.sendForm(
-            "service_aff0g6m",
-            "template_r4jliu2",
+            emailData.service_id,
+            emailData.template_id,
             event.target,
-            "user_90GoifjZzw54lvDIKRtJp"
+            emailData.user_id
           );
         })
         .then(() => {
-          console.log("your submitted");
           this.setState({
             name: "",
             location: "",

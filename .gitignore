@@ -25,3 +25,5 @@ yarn-error.log*
 
 
 firestore.js
+
+email.js
