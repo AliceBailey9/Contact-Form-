@@ -115,3 +115,7 @@ input {
 h1 {
   color: white;
 }
+
+img {
+  width: 600px;
+}

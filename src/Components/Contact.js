@@ -1,6 +1,6 @@
 import { firebase } from "../firestore";
 import React, { Component } from "react";
-const { validateNameContent } = require("../utils");
+const { validateEmail, validateNameContent } = require("../utils");
 
 class Contact extends Component {
   state = {
@@ -17,19 +17,19 @@ class Contact extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { name, content } = this.state;
-    alert(validateNameContent(name, content));
+    const { name, content, email } = this.state;
     if (
-      validateNameContent(name, content) ===
-      "Your contact request has been submitted, thank you"
+      validateNameContent(name, content) === "valid" &&
+      validateEmail(email) === "valid"
     ) {
+      alert("Your contact request has been submitted, thank you");
       firebase
         .firestore()
         .collection("Contact-Information")
         .doc(this.state.name)
         .set(this.state)
         .then(() => {
-          console.log("your sumbitted");
+          console.log("your submitted");
           this.setState({
             name: "",
             location: "",
@@ -38,6 +38,26 @@ class Contact extends Component {
             content: "",
           });
         });
+    } else if (
+      validateNameContent(name, content) === "valid" &&
+      validateEmail(email) === "invalid"
+    ) {
+      alert("Please enter a valid email address");
+    } else if (
+      validateNameContent(name, content) !== "valid" &&
+      validateEmail(email) === "valid"
+    ) {
+      alert(validateNameContent(name, content));
+    } else if (
+      validateNameContent(name, content) !== "valid" &&
+      validateEmail(email) === "invalid"
+    ) {
+      alert(
+        `${validateNameContent(
+          name,
+          content
+        )} Please enter a valid email address.`
+      );
     }
   };
 
