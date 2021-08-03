@@ -1,3 +1,4 @@
+import { firebase } from "../firestore";
 import React, { Component } from "react";
 const { validateNameContent } = require("../utils");
 
@@ -22,14 +23,21 @@ class Contact extends Component {
       validateNameContent(name, content) ===
       "Your contact request has been submitted, thank you"
     ) {
-      console.log("your sumbitted");
-      this.setState({
-        name: "",
-        location: "",
-        email: "",
-        type: "General Enquiry",
-        content: "",
-      });
+      firebase
+        .firestore()
+        .collection("Contact-Information")
+        .doc(this.state.name)
+        .set(this.state)
+        .then(() => {
+          console.log("your sumbitted");
+          this.setState({
+            name: "",
+            location: "",
+            email: "",
+            type: "General Enquiry",
+            content: "",
+          });
+        });
     }
   };
 
