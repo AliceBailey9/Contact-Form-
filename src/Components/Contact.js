@@ -1,4 +1,5 @@
 import { firebase } from "../firestore";
+import emailjs from "emailjs-com";
 import React, { Component } from "react";
 const { validateEmail, validateNameContent } = require("../utils");
 
@@ -28,6 +29,14 @@ class Contact extends Component {
         .collection("Contact-Information")
         .doc(this.state.name)
         .set(this.state)
+        .then(() => {
+          emailjs.sendForm(
+            "service_aff0g6m",
+            "template_r4jliu2",
+            event.target,
+            "user_90GoifjZzw54lvDIKRtJp"
+          );
+        })
         .then(() => {
           console.log("your submitted");
           this.setState({
@@ -104,7 +113,7 @@ class Contact extends Component {
               }
             >
               <option value="General Enquiry">General Enquiry</option>
-              <option value="Request a Call Back">A Call Back</option>
+              <option value="Call Back Request">A Call Back</option>
               <option value="Customer Service Enquiry">
                 Customer Service Enquiry
               </option>
