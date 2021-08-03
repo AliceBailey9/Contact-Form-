@@ -1,5 +1,14 @@
+* {
+  font-family: "Times New Roman", Times, serif;
+}
 .App {
   text-align: center;
+  background-color: #282c34;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0;
 }
 
 .sidebar {
@@ -37,6 +46,7 @@
   position: absolute;
   right: -50px;
   background-color: peru;
+  cursor: pointer;
 }
 
 .hamburger:after,
@@ -59,4 +69,49 @@
 }
 .sidebar.active .hamburger div {
   transform: scale(0);
+}
+
+form {
+  width: auto;
+}
+
+input {
+  display: block;
+  width: 30%;
+  margin: auto;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.input-enquiry {
+  color: #fff;
+  margin: 30px;
+}
+
+#input-enquiry-label {
+  margin: 10px;
+}
+
+#input-content {
+  height: 80px;
+}
+
+#contact-button {
+  padding: 10px;
+  margin: 40px;
+  background-color: peru;
+  color: white;
+  font-size: 18px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+#contact-button:hover {
+  color: peru;
+  background-color: white;
+}
+
+h1 {
+  color: white;
 }
