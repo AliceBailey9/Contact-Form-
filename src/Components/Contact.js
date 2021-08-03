@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+const { validateNameContent } = require("../utils");
 
 class Contact extends Component {
   state = {
@@ -16,14 +17,12 @@ class Contact extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { name, content } = this.state;
-    if (name.length === 0 && content.length === 0) {
-      alert("You need to fill out your name and add some content");
-    } else if (name.length === 0) {
-      alert("You need to fill out your name");
-    } else if (content.length === 0) {
-      alert("You need to add some content");
-    } else {
-      alert("Your contact request has been submitted, thank you");
+    alert(validateNameContent(name, content));
+    if (
+      validateNameContent(name, content) ===
+      "Your contact request has been submitted, thank you"
+    ) {
+      console.log("your sumbitted");
       this.setState({
         name: "",
         location: "",
@@ -36,7 +35,7 @@ class Contact extends Component {
 
   render() {
     const { name, location, email, type, content } = this.state;
-    console.log(name, location, email, type, content);
+
     return (
       <div>
         <h1>Contact Form</h1>
@@ -87,7 +86,7 @@ class Contact extends Component {
           <input
             id="input-content"
             type="textarea"
-            placeholder="Content"
+            placeholder="Content*"
             name="content"
             value={content}
             onChange={(event) =>
